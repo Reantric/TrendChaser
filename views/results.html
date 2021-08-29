@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name ="viewport" content="width-device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+        <title>Results - TrendChaser</title>
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+        <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+        <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <style>
+            h1 {
+              text-align: center;
+            }
+            div.ting{
+                padding-top: 50px;
+                padding-right: 30px;
+                padding-left: 80px;
+            }
+            div.bigbox{
+                margin:auto;
+                width:96%;
+                padding:30px;
+                border-radius: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-light navbar-expand bg-light navigation-clean" style="color: rgb(7,116,225);background: rgb(66,0,255);">
+            <div class="container"><a class="navbar-brand" href="/" style="width: 100%;text-align: center;font-size: 30px;">TrendChaser</a><button class="navbar-toggler" data-bs-toggle="collapse"></button></div>
+        </nav>
+        
+        <div class="bigbox" style="background-color: rgb(179, 230, 253);">
+        <h1 style = "text-align: center"><b><u>Related Topics</u></b></h1>
+        <p style = "text-align: center">People searching for your term also searched for these topics. Note that zero values here do not mean that these topics are not popular. They are just less frequently searched compared to the others on the list.</p>
+        <h3 style = "text-align: center"><b>Top Topics</b></h3>
+        <div class="container">
+            <table class="table table-sm table-bordered table-hover" style = "border: 2px solid rgba(0, 0, 0, 0.144)">
+                <thead>
+                    <tr>
+                        <th>Top Topics</th>
+                        <th>Relative Popularity of Topics (Out of 100)</th>
+                    </tr>
+                </thead>
+                <tbody id="data2">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="ting"></div>
+        <h3 style = "text-align: center"><b>Rising Topics</b></h3>
+        <div class="container">
+            <table class="table table-sm table-bordered table-hover" style = "border: 2px solid rgba(0, 0, 0, 0.144)">
+                <thead>
+                    <tr>
+                        <th>Rising Topics</th>
+                        <th>Relative Popularity Increase (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="data3">
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <br>
+        <div class="bigbox" style="background-color:hsl(215, 100%, 84%)">
+            <h1 style = "text-align: center"><b><u>Related Queries</u></b></h1>
+            <p style = "text-align: center">People searching for your term also searched for the following queries. Note that zero values here do not mean that these queries are not popular. They are just less frequently searched compared to the others on the list.</p>
+            <h3 style = "text-align: center"><b>Top Queries</b></h3>
+            <div class="container">
+                <table class="table table-sm table-bordered table-hover" style = "border: 2px solid rgba(0, 0, 0, 0.144)">
+                    <thead>
+                        <tr>
+                            <th>Top Queries</th>
+                            <th>Relative Popularity of Queries (Out of 100)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+    
+                    </tbody>
+                </table>
+            </div>
+            <div class="ting"></div>
+            <h3 style = "text-align: center"><b>Rising Queries</b></h3>
+            <div class="container">
+                <table class="table table-sm table-bordered table-hover" style = "border: 2px solid rgba(0, 0, 0, 0.144)">
+                    <thead>
+                        <tr>
+                            <th>Rising Queries</th>
+                            <th>Relative Popularity Increase (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data1">
+                        
+                    </tbody>
+                </table>
+            </div>
+            </div>
+    
+            <div class="ting"></div>
+
+            <footer class="footer-basic" style="height: 50px;padding: 0px 0px;">
+                <p class="copyright" style="margin: 0px 0px 0px;padding: 14px;text-align: center;">TrendChaser | Created August 2021</p>
+            </footer>
+            <!-- <h1>This is the stuff</h1>
+            <div id="debug"></div> -->
+
+        
+
+        <script>
+            console.log("hello!");
+            fetch("relatedQueries.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['0'].rankedKeyword)
+                    if(data.default.rankedList['0'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['0'].rankedKeyword.forEach((u)=>{
+                            temp+="<tr>";
+                            temp+="<td>"+u.query+"</td>";
+                            temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data").innerHTML = temp;
+                    }
+                    
+                })
+            
+            fetch("relatedQueries.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['1'].rankedKeyword)
+                    if(data.default.rankedList['1'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['1'].rankedKeyword.forEach((u)=>{  
+                                temp+="<tr>";
+                                temp+="<td>"+u.query+"</td>";
+                                temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data1").innerHTML = temp;
+                    }
+                    
+                })
+
+            fetch("relatedTopics.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['0'].rankedKeyword)
+                    if(data.default.rankedList['0'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['0'].rankedKeyword.forEach((u)=>{   
+                                temp+="<tr>";
+                                temp+="<td>"+u["topic"]["title"]+"</td>";
+                                temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data2").innerHTML = temp;
+                    }
+                    
+                })
+            
+            fetch("relatedTopics.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['1'].rankedKeyword)
+                    if(data.default.rankedList['1'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['1'].rankedKeyword.forEach((u)=>{
+                            temp+="<tr>";
+                            temp+="<td>"+u["topic"]["title"]+"</td>";
+                            temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data3").innerHTML = temp;
+                    }
+                    
+                })
+        </script>
+    </body>
+</html>

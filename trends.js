@@ -1,14 +1,12 @@
 const googleTrends = require('google-trends-api');
 const fs = require('fs')
-//let state = ;
-//let zipcode = ;
 let location = "US-NJ-501";
 let lastHours = 24;
 let offset = new Date().getTimezoneOffset();
 let timenow = new Date();
 let timethen = new Date();
 timethen.setHours(timethen.getHours() - lastHours);
-googleTrends.relatedQueries({keyword: 'Chinese Food', startTime: timethen, endTime: timenow, geo: location, timezone: offset, granularTimeResolution: true})
+googleTrends.relatedTopics({keyword: 'Chinese Food', startTime: timethen, endTime: timenow, geo: location, timezone: offset, granularTimeResolution: true})
 .then(function(results) {
   console.log(results);
 })

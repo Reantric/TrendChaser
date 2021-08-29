@@ -1,0 +1,25 @@
+{
+  "name": "trendchaser",
+  "version": "1.0.0",
+  "description": "Chasing trends",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "google-trends-api": "^4.9.2",
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protonlaser91/TrendChaser.git"
+  },
+  "author": "Arnav Chaku, Aaron Fan, Anuraag Pandhi, Eric Zou",
+  "license": "GNU General Public License v3.0",
+  "bugs": {
+    "url": "https://github.com/protonlaser91/TrendChaser/issues"
+  },
+  "homepage": "https://github.com/protonlaser91/TrendChaser#readme"
+}
