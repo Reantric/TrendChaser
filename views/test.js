@@ -9,7 +9,7 @@ var fs = require('fs');
 console.log(timenow)
 timethen.setHours(timethen.getHours() - lastHours);
 console.log(timethen)
-googleTrends.relatedQueries({keyword: 'Chinese Food', startTime: timethen, endTime: timenow, geo: ['US-NJ-501'], timezone: offset, granularTimeResolution: true})
+googleTrends.relatedQueries({keyword: 'pizza places', startTime: timethen, endTime: timenow, geo: ['US-NJ-501'], timezone: offset, granularTimeResolution: true})
 .then(function(results) {
   console.log(results);
   fs.writeFile ("output.json", results, function(err) {
@@ -22,4 +22,28 @@ googleTrends.relatedQueries({keyword: 'Chinese Food', startTime: timethen, endTi
   console.error(err);
 })
 
+googleTrends.relatedTopics({keyword: 'pizza places', startTime: timethen, endTime: timenow, geo: ['US-NJ-501'], timezone: offset, granularTimeResolution: true})
+.then(function(results) {
+  console.log(results);
+  fs.writeFile ("output2.json", results, function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
+})
+.catch(function(err) {
+  console.error(err);
+})
 
+googleTrends.interestOverTime({keyword: 'pizza places', startTime: timethen, endTime: timenow, geo: ['US-NJ-501'], timezone: offset, granularTimeResolution: true})
+.then(function(results) {
+  console.log(results);
+  fs.writeFile ("output3.json", results, function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);
+})
+.catch(function(err) {
+  console.error(err);
+})

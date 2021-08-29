@@ -38,7 +38,12 @@ app.listen(port, () => {
   if (place.length > 2) 
     var city = place[place.length-3]
   console.log(state,city,map[body.timeframe]);
-  res.render("ailun");
+  res.render("ailun")
+  // res.end();
 }) 
+
+app.get("/ailun", (req,res) => {
+  res.render("ailun")
+})
 
 
