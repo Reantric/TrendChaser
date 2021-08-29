@@ -5,7 +5,7 @@
         <meta name ="viewport" content="width-device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie-edge">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-        <title>Home - TrendChaser</title>
+        <title>Results - TrendChaser</title>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
         <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
@@ -23,20 +23,28 @@
                 padding-right: 30px;
                 padding-left: 80px;
             }
+            div.bigbox{
+                margin:auto;
+                width:96%;
+                padding:30px;
+                border-radius: 25px;
+            }
         </style>
     </head>
     <body>
         <nav class="navbar navbar-light navbar-expand bg-light navigation-clean" style="color: rgb(7,116,225);background: rgb(66,0,255);">
             <div class="container"><a class="navbar-brand" href="thingy.html" style="width: 100%;text-align: center;font-size: 30px;">TrendChaser</a><button class="navbar-toggler" data-bs-toggle="collapse"></button></div>
         </nav>
-        <div class="ting"></div>
-        <h1 text-align: center>Related Queries</h1>
+        <div class="bigbox" style="background-color:hsl(215, 100%, 73%)">
+        <h1 style = "text-align: center"><b><u>Related Queries</u></b></h1>
+        <p style = "text-align: center">People searching for your term also searched for the following queries.</p>
+        <h3 style = "text-align: center"><b>Top Queries</b></h3>
         <div class="container">
             <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Top Queries</th>
-                        <th>Relative Popularity out of 100</th>
+                        <th>Relative Popularity of Queries (Out of 100)</th>
                     </tr>
                 </thead>
                 <tbody id="data">
@@ -45,13 +53,13 @@
             </table>
         </div>
         <div class="ting"></div>
-        <h1 text-align: center>Searches on the Rise</h1>
+        <h3 style = "text-align: center"><b>Rising Queries</b></h3>
         <div class="container">
             <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Rising Queries</th>
-                        <th>Relative Popularity (% increase)</th>
+                        <th>Relative Popularity Increase (%)</th>
                     </tr>
                 </thead>
                 <tbody id="data1">
@@ -59,6 +67,43 @@
                 </tbody>
             </table>
         </div>
+        </div>
+
+        <div class="ting"></div>
+        <div class="bigbox" style="background-color: rgb(106, 207, 253);">
+        <h1 style = "text-align: center"><b><u>Related Topics</u></b></h1>
+        <p style = "text-align: center">People searching for your term also searched for these topics.</p>
+        <h3 style = "text-align: center"><b>Top Topics</b></h3>
+        <div class="container">
+            <table class="table table-sm table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Top Topics</th>
+                        <th>Relative Popularity of Topics (Out of 100)</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="ting"></div>
+        <h3 style = "text-align: center"><b>Rising Topics</b></h3>
+        <div class="container">
+            <table class="table table-sm table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Rising Topics</th>
+                        <th>Relative Popularity Increase (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="data1">
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <br>
 
             <!-- <h1>This is the stuff</h1>
             <div id="debug"></div> -->
@@ -67,6 +112,40 @@
 
         <script>
             console.log("hello!");
+            fetch("output.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['0'].rankedKeyword)
+                    if(data.default.rankedList['0'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['0'].rankedKeyword.forEach((u)=>{
+                            temp+="<tr>";
+                            temp+="<td>"+u.query+"</td>";
+                            temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data").innerHTML = temp;
+                    }
+                    
+                })
+            
+            fetch("output.json")
+                .then(response => response.json())
+                .then(data=> {
+                    console.log(data.default.rankedList['1'].rankedKeyword)
+                    if(data.default.rankedList['1'].rankedKeyword.length > 0){
+                        var temp = "";
+
+                        data.default.rankedList['1'].rankedKeyword.forEach((u)=>{
+                            temp+="<tr>";
+                            temp+="<td>"+u.query+"</td>";
+                            temp+="<td>"+u.value+"</td>";
+                        })
+                        document.getElementById("data1").innerHTML = temp;
+                    }
+                    
+                })
+
             fetch("output.json")
                 .then(response => response.json())
                 .then(data=> {
