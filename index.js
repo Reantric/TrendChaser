@@ -1,3 +1,4 @@
+
 const express = require('express')
 const app = express()
 
@@ -29,42 +30,56 @@ app.post('/results', (req,res) => {
   const fs = require('fs')
   const body = req.body;
   let place = body.region.split(', ');
-  let zipcode;
   if (place.length < 2){
-     zipcode = place[0]
-  } else
-    zipcode = place[place.length-2].slice(-5);
-
+    res.redirect('/');
+    return;
+  }
   const keyworde = body.business;
+  const zipcode = place[place.length-2].slice(-5);
   const daysBack = map[body.timeframe];
   let rawdata = fs.readFileSync('public/dmazip.json');
+  fs.writeFile('public/kw.txt',keyworde,function(err) {
+    if (err) throw err;
+    console.log('complete');
+    })
   let student = JSON.parse(rawdata);
   const dma = student[zipcode];
   timenow = new Date();
   timethen = new Date();
   timethen.setDate(timethen.getDate()-daysBack);
-  console.log(dma);
   const googleTrends = require('google-trends-api');
-  var relQ, relT;
   googleTrends.relatedTopics({keyword: keyworde, startTime: timethen, endTime: timenow, geo: dma, granularTimeResolution: true})
     .then((res) => {
-      relT = res;
+  fs.writeFile('public/relatedTopics.json',res,function(err) {
+    if (err) throw err;
+    console.log('complete');
     })
-    .catch((err) => {
-      console.log(err);
-    })
-
+})
+.catch((err) => {
+  console.log(err);
+})
   googleTrends.relatedQueries({keyword: keyworde, startTime: timethen, endTime: timenow, geo: dma, granularTimeResolution: true})
-    .then((res) => {
-      relT = res;
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  
+  .then((res) => {
+    fs.writeFile('public/relatedQueries.json',res,function(err) {
+      if (err) throw err;
+      console.log('complete');
+      })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
   //problem here: results page uses old json data each time 
   //(might be because it takes too long to write to JSON files)
   //
-  
-  res.render("results", {relatedQueries:relQ, relatedTopics:relT});
+
+  function stateChange(newState) {
+    setTimeout(function () {
+        if (newState == -1) {
+          res.render("results");
+        }
+    }, 5000);
+}
+stateChange(-1);
 }) 
+
+
