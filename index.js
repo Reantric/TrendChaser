@@ -38,7 +38,7 @@ app.listen(port, () => {
   if (place.length > 2) 
     var city = place[place.length-3]
   console.log(state,city,map[body.timeframe]);
-  res.send("Hello WOrld");
+  res.render("ailun");
 }) 
 
 
