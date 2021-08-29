@@ -38,6 +38,10 @@ app.post('/results', (req,res) => {
   const zipcode = place[place.length-2].slice(-5);
   const daysBack = map[body.timeframe];
   let rawdata = fs.readFileSync('public/dmazip.json');
+  fs.writeFile('public/kw.txt',keyworde,function(err) {
+    if (err) throw err;
+    console.log('complete');
+    })
   let student = JSON.parse(rawdata);
   const dma = student[zipcode];
   timenow = new Date();
@@ -45,7 +49,7 @@ app.post('/results', (req,res) => {
   timethen.setDate(timethen.getDate()-daysBack);
   const googleTrends = require('google-trends-api');
   googleTrends.relatedTopics({keyword: keyworde, startTime: timethen, endTime: timenow, geo: dma, granularTimeResolution: true})
-.then((res) => {
+    .then((res) => {
   fs.writeFile('public/relatedTopics.json',res,function(err) {
     if (err) throw err;
     console.log('complete');
@@ -67,8 +71,15 @@ app.post('/results', (req,res) => {
   //problem here: results page uses old json data each time 
   //(might be because it takes too long to write to JSON files)
   //
-  
-  res.render("results");
+
+  function stateChange(newState) {
+    setTimeout(function () {
+        if (newState == -1) {
+          res.render("results");
+        }
+    }, 5000);
+}
+stateChange(-1);
 }) 
 
 
