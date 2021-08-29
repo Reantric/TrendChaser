@@ -26,7 +26,7 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
- app.post('/results', (req,res) => {
+app.post('/results', (req,res) => {
   const body = req.body;
   let place = body.region.split(',');
   if (place.length < 2){
