@@ -35,9 +35,9 @@
         <nav class="navbar navbar-light navbar-expand bg-light navigation-clean" style="color: rgb(7,116,225);background: rgb(66,0,255);">
             <div class="container"><a class="navbar-brand" href="thingy.html" style="width: 100%;text-align: center;font-size: 30px;">TrendChaser</a><button class="navbar-toggler" data-bs-toggle="collapse"></button></div>
         </nav>
-        <div class="bigbox" style="background-color:hsl(215, 100%, 73%)">
+        <div class="bigbox" style="background-color:hsl(215, 100%, 84%)">
         <h1 style = "text-align: center"><b><u>Related Queries</u></b></h1>
-        <p style = "text-align: center">People searching for your term also searched for the following queries.</p>
+        <p style = "text-align: center">People searching for your term also searched for the following queries. Note that zero values here do not mean that these queries are not popular. They are just less frequently searched compared to the others on the list.</p>
         <h3 style = "text-align: center"><b>Top Queries</b></h3>
         <div class="container">
             <table class="table table-sm table-striped table-bordered table-hover">
@@ -70,9 +70,9 @@
         </div>
 
         <div class="ting"></div>
-        <div class="bigbox" style="background-color: rgb(106, 207, 253);">
+        <div class="bigbox" style="background-color: rgb(179, 230, 253);">
         <h1 style = "text-align: center"><b><u>Related Topics</u></b></h1>
-        <p style = "text-align: center">People searching for your term also searched for these topics.</p>
+        <p style = "text-align: center">People searching for your term also searched for these topics. Note that zero values here do not mean that these topics are not popular. They are just less frequently searched compared to the others on the list.</p>
         <h3 style = "text-align: center"><b>Top Topics</b></h3>
         <div class="container">
             <table class="table table-sm table-striped table-bordered table-hover">
@@ -82,7 +82,7 @@
                         <th>Relative Popularity of Topics (Out of 100)</th>
                     </tr>
                 </thead>
-                <tbody id="data">
+                <tbody id="data2">
 
                 </tbody>
             </table>
@@ -97,7 +97,7 @@
                         <th>Relative Popularity Increase (%)</th>
                     </tr>
                 </thead>
-                <tbody id="data1">
+                <tbody id="data3">
 
                 </tbody>
             </table>
@@ -136,34 +136,34 @@
                     if(data.default.rankedList['1'].rankedKeyword.length > 0){
                         var temp = "";
 
-                        data.default.rankedList['1'].rankedKeyword.forEach((u)=>{
-                            temp+="<tr>";
-                            temp+="<td>"+u.query+"</td>";
-                            temp+="<td>"+u.value+"</td>";
+                        data.default.rankedList['1'].rankedKeyword.forEach((u)=>{  
+                                temp+="<tr>";
+                                temp+="<td>"+u.query+"</td>";
+                                temp+="<td>"+u.value+"</td>";
                         })
                         document.getElementById("data1").innerHTML = temp;
                     }
                     
                 })
 
-            fetch("output.json")
+            fetch("stuff.json")
                 .then(response => response.json())
                 .then(data=> {
                     console.log(data.default.rankedList['0'].rankedKeyword)
                     if(data.default.rankedList['0'].rankedKeyword.length > 0){
                         var temp = "";
 
-                        data.default.rankedList['0'].rankedKeyword.forEach((u)=>{
-                            temp+="<tr>";
-                            temp+="<td>"+u.query+"</td>";
-                            temp+="<td>"+u.value+"</td>";
+                        data.default.rankedList['0'].rankedKeyword.forEach((u)=>{   
+                                temp+="<tr>";
+                                temp+="<td>"+u["topic"]["title"]+"</td>";
+                                temp+="<td>"+u.value+"</td>";
                         })
-                        document.getElementById("data").innerHTML = temp;
+                        document.getElementById("data2").innerHTML = temp;
                     }
                     
                 })
             
-            fetch("output.json")
+            fetch("stuff.json")
                 .then(response => response.json())
                 .then(data=> {
                     console.log(data.default.rankedList['1'].rankedKeyword)
@@ -172,10 +172,10 @@
 
                         data.default.rankedList['1'].rankedKeyword.forEach((u)=>{
                             temp+="<tr>";
-                            temp+="<td>"+u.query+"</td>";
+                            temp+="<td>"+u["topic"]["title"]+"</td>";
                             temp+="<td>"+u.value+"</td>";
                         })
-                        document.getElementById("data1").innerHTML = temp;
+                        document.getElementById("data3").innerHTML = temp;
                     }
                     
                 })

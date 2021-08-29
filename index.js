@@ -16,8 +16,7 @@ app.use(express.json());
 
 app.set('view engine', 'jade');
 app.use(express.static('public'))
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+app.use(express.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 
 app.get('/', (req, res) => {
     res.render('index');
