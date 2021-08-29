@@ -58,3 +58,24 @@
   margin-bottom: 0;
 }
 
+.column {
+  flex: 50%;
+}
+
+#inputRow {
+  padding-left: 110px;
+  width: 130%;
+}
+
+#elongate {
+  width: 122%;
+}
+
+#smol {
+  width: 12%;
+}
+
+#move {
+  padding-left: 100px;
+}
+

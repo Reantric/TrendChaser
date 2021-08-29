@@ -19,19 +19,43 @@
         <div class="container"><a class="navbar-brand" href="#" style="width: 100%;text-align: center;font-size: 30px;">TrendChaser</a><button class="navbar-toggler" data-bs-toggle="collapse"></button></div>
     </nav>
     <header class="text-center text-white masthead" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
-        <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-xl-9 mx-auto position-relative">
                     <h1 class="pulse animated mb-5">Expand your business by analyzing trends!</h1>
                 </div>
-                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
-                    <form>
-                        <div class="row">
-                            <div class="col-12 col-md-9 mb-2 mb-md-0"><input type="search" class="form-control form-control-lg" placeholder="Enter your business..." /></div>
-                            <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" data-bss-hover-animate="pulse" type="submit">Analyze!</button></div>
-                        </div>
-                    </form>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <form method="POST" action="\ailun" enctype="application/x-www-form-urlencoded"> 
+                <div class="row pulse animated" id="inputRow">
+                    <div class="col-md-3 align-self-center">
+                        <input name = "business" class="border rounded-0 form-control" type="search" id="elongate" placeholder="Enter your business..." autocomplete="on" required="true">
+                    </div>
+                    <div class="col-md-3 align-self-center" id="move">
+                        <input
+      name = "region"                  
+      id="pac-input"
+      class="form-control"
+      type="text"
+      placeholder="Enter your region..."
+      required="true"
+    />
+                    </div>
+                    <div class="col-md-3 align-self-center" id="smol">
+                        <select name="timeframe" class="form-select">
+                                <optgroup label="Choose a time frame">
+                                    <option value="12" selected="">24 hours</option>
+                                    <option value="13">7 days</option>
+                                    <option value="14">1 month</option>
+                                    <option value="15">3 months</option>
+                                    <option value="15">6 months</option>
+                                </optgroup>
+                            </select>
+                    </div>
+                    <div class="col-md-3 align-self-center"><button class="btn btn-primary btn-lg d-xxl-flex align-items-xxl-start" data-bss-hover-animate="pulse" type="submit">Analyze!</button></form></div>
+                
                 </div>
             </div>
         </div>
@@ -70,6 +94,8 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="assets/js/mapbutton.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kts46y9NQNISjUsgyoaw7zWzgdMjMdc&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly&amp;channel=2"></script>
 </body>
 
 </html>
