@@ -5,8 +5,8 @@
   "main": "server/server.js",
   "dependencies": {
     "express": "^4.17.1",
-    "google-trends-api": "^4.9.2",
-    "jade": "^0.29.0"
+    "firebase": "^8.6.8",
+    "google-trends-api": "^4.9.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
