@@ -1,0 +1,2 @@
+# TrendChaser
+Chasing trends
