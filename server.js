@@ -1,6 +1,6 @@
 
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 const map = {
   12: 1,
@@ -10,12 +10,12 @@ const map = {
   16: 186
 };
 
-const port = 3000
+const port = 3000;
 
 app.use(express.json());
 
 app.set('view engine', 'jade');
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 
 app.get('/', (req, res) => {
