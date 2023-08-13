@@ -2,7 +2,7 @@
   "name": "trendchaser",
   "version": "1.0.0",
   "description": "Chasing trends",
-  "main": "index.js",
+  "main": "server/server.js",
   "dependencies": {
     "express": "^4.17.1",
     "google-trends-api": "^4.9.2",
@@ -18,7 +18,7 @@
   "author": "Arnav Chaku, Aaron Fan, Anuraag Pandhi, Eric Zou",
   "license": "GNU General Public License v3.0",
   "bugs": {
-    "url": "https://github.com/protonlaser91/TrendChaser/issues"
+    "url": "https://github.com/Reantric/TrendChaser/issues"
   },
-  "homepage": "https://github.com/protonlaser91/TrendChaser#readme"
+  "homepage": "https://github.com/Reantric/TrendChaser#readme"
 }

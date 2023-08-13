@@ -1,16 +1,19 @@
 
+const googleTrends = require('google-trends-api');
+const fs = require('fs');
 const express = require('express');
 const app = express();
+const port = 3000;
 
-const map = {
+const zipcodeToDMA = JSON.parse(fs.readFileSync('public/dmazip.json'));
+
+const mapDays = {
   12: 1,
   13: 7,
   14: 31,
   15: 93,
   16: 186
 };
-
-const port = 3000;
 
 app.use(express.json());
 
@@ -27,7 +30,6 @@ app.listen(port, () => {
 })
 
 app.post('/results', (req,res) => {
-  const fs = require('fs')
   const body = req.body;
   let place = body.region.split(', ');
   if (place.length < 2){
@@ -36,21 +38,21 @@ app.post('/results', (req,res) => {
   }
   const keyworde = body.business;
   const zipcode = place[place.length-2].slice(-5);
-  const daysBack = map[body.timeframe];
+  const daysBack = mapDays[body.timeframe];
   let rawdata = fs.readFileSync('public/dmazip.json');
   fs.writeFile('public/kw.txt',keyworde,function(err) {
     if (err) throw err;
     console.log('complete');
     })
-  let student = JSON.parse(rawdata);
-  const dma = student[zipcode];
+
+  const dma = zipcodeToDMA[zipcode];
   timenow = new Date();
   timethen = new Date();
   timethen.setDate(timethen.getDate()-daysBack);
-  const googleTrends = require('google-trends-api');
+
   googleTrends.relatedTopics({keyword: keyworde, startTime: timethen, endTime: timenow, geo: dma, granularTimeResolution: true})
     .then((res) => {
-  fs.writeFile('public/relatedTopics.json',res,function(err) {
+  fs.writeFile('server/relatedTopics.json',res,function(err) {
     if (err) throw err;
     console.log('complete');
     })
@@ -60,7 +62,7 @@ app.post('/results', (req,res) => {
 })
   googleTrends.relatedQueries({keyword: keyworde, startTime: timethen, endTime: timenow, geo: dma, granularTimeResolution: true})
   .then((res) => {
-    fs.writeFile('public/relatedQueries.json',res,function(err) {
+    fs.writeFile('server/relatedQueries.json',res,function(err) {
       if (err) throw err;
       console.log('complete');
       })

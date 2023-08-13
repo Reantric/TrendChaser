@@ -16,7 +16,7 @@ googleTrends.relatedTopics({keyword: 'Chinese Food', startTime: timethen, endTim
 googleTrends.relatedTopics({keyword: 'Chinese Food', startTime: timethen, endTime: timenow, geo: location, timezone: offset, granularTimeResolution: true})
 .then(function(results) {
   console.log(results);
-  fs.writeFile("stuff.json",results, function (err) {
+  fs.writeFile("results.json",results, function (err) {
     if (err) return console.log(err);
   });
 })
